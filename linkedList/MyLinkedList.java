@@ -19,7 +19,7 @@ public class MyLinkedList {
 			while (tempNode.next != null) {
 				tempNode = tempNode.next;
 			}
-			// This is penultimate node.
+			//
 			tempNode.next = node;
 
 		}
@@ -27,7 +27,7 @@ public class MyLinkedList {
 
 	/**
 	 * 
-	 * @return Size of the linkedlist including head and tail
+	 * @return
 	 */
 	public int size() {
 		if (head == null) {
@@ -45,8 +45,15 @@ public class MyLinkedList {
 		}
 	}
 
+	/**
+	 * Insert at 1 to n-1 location.
+	 * 
+	 * @param data
+	 *            data to be inserted
+	 * @param location
+	 *            data at the location
+	 */
 	public void insertAt(int data, int location) {
-
 		Node node = new Node();
 		node.data = data;
 		node.next = null;
@@ -54,22 +61,97 @@ public class MyLinkedList {
 		// If head is Empty
 		if (head == null) {
 			head = node;
+		} else if (location == 1) {
+			insertAtFirst(data);
 		} else {
 			Node tempNode = head;
-			int traverseCount = 0;
-			while (traverseCount <= size()) {
-				tempNode = tempNode.next;
-				if (traverseCount == location) {
-					Node nextNode = tempNode.next;
-					node.next = nextNode;
-					tempNode.next = node;
-
+			int counter = 1;
+			while (tempNode.next != null) {
+				if (counter == (location - 1)) {
+					Node newNode = new Node();
+					newNode.data = data;
+					newNode.next = tempNode.next;
+					tempNode.next = newNode;
+					break;
 				}
-				traverseCount++;
+				counter++;
+				tempNode = tempNode.next;
 			}
+
 		}
 	}
 
+	/**
+	 * Delete specific data from the LL
+	 * 
+	 * @param data
+	 */
+	public void delete(int data) {
+
+		Node tempNode = head;
+		Node previousNode = null;
+		if (head != null) {
+			while (tempNode.next != null) {
+				if (tempNode.data == data) {
+					// If deletion is at head
+					if (previousNode == null) {
+						head = tempNode.next;
+						break;
+					}
+
+					previousNode.next = tempNode.next;
+					break;
+				}
+				previousNode = tempNode;
+				// Traversing to next node.
+				tempNode = tempNode.next;
+
+			}
+			if (tempNode.next == null) {
+				previousNode.next = null;
+			}
+		} else {
+			throw new NullPointerException();
+		}
+
+	}
+
+	/**
+	 * Insert the data at first location
+	 * 
+	 * @param data
+	 */
+	public void insertAtFirst(int data) {
+		Node node = new Node();
+		node.data = data;
+		node.next = head;
+		head = node;
+	}
+
+	/**
+	 * Insert the data at the last
+	 * 
+	 * @param data
+	 */
+	public void insertAtLast(int data) {
+		// Creation of new node
+		Node node = new Node();
+		node.data = data;
+		node.next = null;
+
+		Node tempNode = head;
+		while (tempNode.next != null) {
+			// Traversing to next node
+			tempNode = tempNode.next;
+		}
+		// After iteration, tempNode.next is last. Being pointed to new node.
+		tempNode.next = node;
+
+	}
+
+	/**
+	 * Print the entire list
+	 */
 	public void displayList() {
 		Node tempNode = head;
 		while (tempNode.next != null) {
@@ -77,6 +159,25 @@ public class MyLinkedList {
 			tempNode = tempNode.next;
 
 		}
+		System.out.println(tempNode.data);
 
+	}
+
+	public void displayReverseLL() {
+
+		reverse(head);
+
+	}
+
+	/**
+	 * Prints the LL in reverse
+	 * 
+	 * @param head
+	 */
+	private void reverse(Node head) {
+		if (head.next != null) {
+			reverse(head.next);
+		}
+		System.out.println("" + head.data);
 	}
 }
