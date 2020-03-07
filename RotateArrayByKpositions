@@ -1,0 +1,54 @@
+package problem.solving;
+
+/**
+ * 
+ * @author gowtham pr Rotate array by k' positions
+ *         {@link}https://java2blog.com/rotate-array-by-k-positions/
+ * 
+ * 
+ * 
+ */
+
+public class RotateArrayByKpositions {
+	static int array[] = new int[1234];
+	static {
+
+		for (int i = 0; i < 1234; i++) {
+			array[i] = i;
+		}
+	}
+
+	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
+		System.out.println(System.currentTimeMillis());
+		int k = 5;
+		// create a temp array and copy k' position elements
+		int tempArray[] = new int[k];
+		for (int i = 0; i < k; i++) {
+			tempArray[i] = array[i];
+		}
+
+		// Rotate thie elements in the array
+		int kTemp = k;
+		for (int i = 0; i < array.length; i++) {
+			array[i] = array[kTemp % array.length];
+			kTemp++;
+
+		}
+
+		// Copy the temp array to original array
+		int kTemp2 = k;
+		for (int i = 0; i < tempArray.length; i++) {
+			array[array.length - kTemp2] = tempArray[i];
+			kTemp2--;
+		}
+
+		// Prints the result
+		for (int i = 0; i < array.length; i++) {
+			System.out.println(array[i]);
+		}
+
+		long end = System.currentTimeMillis();
+		System.out.println(end - start);
+	}
+}
