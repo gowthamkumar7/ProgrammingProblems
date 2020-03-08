@@ -1,0 +1,62 @@
+package problem.solving;
+
+/**
+ * 
+ * @author gowtham pr
+ * 
+ *         Find Nth Prime Number
+ */
+public class NthPrime {
+
+	public static void main(String[] args) {
+
+		long limit = Integer.MAX_VALUE;
+		long counterC = 0;
+		for (long i = 2; i <= limit; i++) {
+			int counter = 0;
+
+			for (long num = i; num >= 1; num--) {
+				if ((i % num == 0)) {
+					counter = counter + 1;
+
+				}
+			}
+			if (counter == 2 && counterC < 10001) {
+				System.out.println(i);
+				counterC++;
+
+			}
+
+		}
+	}
+
+	public void th_prime() {
+		int counter = 10001;
+		int n = counter;
+		for (int i = 2; i <= n; i++) {
+
+			boolean isPrime = false;
+			int y = -1;
+
+			for (int j = 2; j <= n; j++) {
+
+				if ((i % j == 0) && (j < i)) {
+					y = -1;
+					isPrime = false;
+					break;
+				} else {
+					y = i;
+					isPrime = true;
+				}
+
+			}
+			if (y != -1 && counter != 0) {
+				n--;
+				System.out.println(y);
+			} else {
+				break;
+			}
+		}
+
+	}
+}
