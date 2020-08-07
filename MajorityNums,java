@@ -1,0 +1,70 @@
+package problems.leetcode;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+/**Find the Majority Numbers in an Array**/
+public class MajorityNums {
+
+	public static void main(String[] args) {
+		int array[] = { 1,1,1,1,2,3,4,5,6,7,8 };
+
+		//System.out.println(majorityElement1(array));
+		System.out.println(majorityElement01(array));
+	}
+
+	public static int majorityElement1(int[] nums) {
+		Arrays.sort(nums);
+		return nums[nums.length / 2];
+	}
+
+	//Moore voting
+	//This is will only work if the frequency of elements one after another.
+	 public static int majorityElement01(int[] nums) {
+	        int count = 0;
+	        Integer candidate = null;
+
+	        for (int num : nums) {
+	            if (count == 0) {
+	                candidate = num;
+	            }
+	            count += (num == candidate) ? 1 : -1;
+	        }
+
+	        return candidate;
+	    }
+	
+	
+	//Using Hashmap
+	 public static int majorityElement(int[] a) {
+	        
+	        HashMap<String,Integer> map =new HashMap<String, Integer>();
+	        
+	        for(int x=0;x<a.length;x++){
+	            
+	            if(map.containsKey(""+a[x])){
+	                
+	                int c= map.get(""+a[x]);
+	                c++;
+	                map.put(""+a[x],c);
+	            }else{
+	               map.put(""+a[x],1);
+	            }
+	            
+	        }
+	        
+	        int count=0;
+	        String result="";
+	        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+	            if(entry.getValue()>count){
+	                count=entry.getValue();
+	                result=""+entry.getKey();
+	            }
+	            
+	                //System.out.println(entry.getKey() + "/" + entry.getValue());
+	            }
+	        
+	        
+	        return Integer.valueOf(result);
+	    }
+}
