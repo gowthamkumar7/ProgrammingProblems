@@ -1,0 +1,44 @@
+public class MoveNegativeNumbers(){
+ 
+ 
+ 
+ public static void main(String args[]) {
+
+
+    moveNumbersWithExtraSpace();
+
+}
+
+
+/**
+** Moves all negative numbers to right of the Array**/
+public void moveNumbersWithExtraSpace (){
+
+
+ int tempArray[]=new int[array.length];
+    
+    int lastVisitedIndex=0;
+    
+    for(int i=0;i<=tempArray.length-1;i++){
+        if(array[i]>0)tempArray[lastVisitedIndex++]=array[i];
+    }
+    
+    for(int j=0;j<=tempArray.length-1;j++){
+        if(array[j]<0)tempArray[lastVisitedIndex++]=array[j];
+        
+    }
+    
+    
+    for(int y=0;y<=tempArray.length-1;y++){
+        System.out.print(tempArray[y]);
+    }
+
+
+
+
+}
+
+
+
+
+}
